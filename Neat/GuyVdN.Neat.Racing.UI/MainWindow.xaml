@@ -1,0 +1,82 @@
+﻿<Window x:Class="Neat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Neat"
+        mc:Ignorable="d"
+        Title="GuyVdN.Neat.Racing" Height="1000" Width="2000" KeyDown="MainWindow_KeyDown" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label FontSize="16">Generation: </Label>
+            <Label FontSize="16" x:Name="GenerationValue">0</Label>
+            <Label FontSize="16">Number of species:</Label>
+            <Label FontSize="16" x:Name="SpeciesValue">0</Label>
+        </StackPanel>
+
+        <Label FontSize="16" Grid.Column="5" Grid.Row="0" Name="PressAnyKeyLabel" HorizontalAlignment="Center" VerticalAlignment="Center">Press any key to Process next generation</Label>
+        
+        <Viewbox Grid.Row="1" Grid.Column="1">
+            <local:GameControl x:Name="GameControl0" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+        </Viewbox> 
+        
+        <Viewbox Grid.Row="1" Grid.Column="3">
+            <local:GameControl x:Name="GameControl1" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+        </Viewbox>        
+        
+        <Viewbox Grid.Row="1" Grid.Column="5">
+            <local:GameControl x:Name="GameControl2" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+        </Viewbox>        
+        
+        <Viewbox Grid.Row="1" Grid.Column="7">
+            <local:GameControl x:Name="GameControl3" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+        </Viewbox>        
+        
+        <Viewbox Grid.Row="1" Grid.Column="9">
+            <local:GameControl x:Name="GameControl4" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+        </Viewbox>        
+        
+        <Viewbox Grid.Row="3" Grid.Column="1">
+            <local:GenomeControl x:Name="GenomeControl0"  />
+        </Viewbox>        
+        
+        <Viewbox Grid.Row="3" Grid.Column="3">
+            <local:GenomeControl x:Name="GenomeControl1"  />
+        </Viewbox>        
+        
+        <Viewbox Grid.Row="3" Grid.Column="5">
+            <local:GenomeControl x:Name="GenomeControl2"  />
+        </Viewbox>        
+        
+        <Viewbox Grid.Row="3" Grid.Column="7">
+            <local:GenomeControl x:Name="GenomeControl3" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+        </Viewbox>        
+        
+        <Viewbox Grid.Row="3" Grid.Column="9">
+            <local:GenomeControl x:Name="GenomeControl4" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+        </Viewbox>
+        <ProgressBar x:Name="TrainingProgress" Grid.Column="5" Grid.Row="2"/>
+
+    </Grid>
+</Window>
