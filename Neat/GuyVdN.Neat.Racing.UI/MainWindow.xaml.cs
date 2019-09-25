@@ -17,14 +17,11 @@ namespace Neat
     public partial class MainWindow : Window
     {
         private const bool playYourself = false;
-        private readonly Game game = new Game();
+        private readonly Game manualGame = new Game();
         private int generation = 0;
         private int numberOfGenerationsToTrain = 1;
         private Dictionary<int, Game> games;
         private readonly Population population;
-        private List<int> playersThatMovedLeft = new List<int>();
-        private List<int> playersThatMovedRight = new List<int>();
-        private List<int> playersThatMovedForward = new List<int>();
         private readonly GameControl[] gameControls = new GameControl[5];
         private readonly GenomeControl[] genomeControls = new GenomeControl[5];
         private readonly BackgroundWorker backGroundWorker = new BackgroundWorker { WorkerReportsProgress = true };
@@ -77,14 +74,8 @@ namespace Neat
 
         private double GetPlayerFitness(Player player)
         {
-            var playerNumber = player.Number;
-            var multiplier = 0;
-
-            if (playersThatMovedLeft.Contains(playerNumber)) multiplier++;
-            if (playersThatMovedRight.Contains(playerNumber)) multiplier++;
-            if (playersThatMovedForward.Contains(playerNumber)) multiplier++;
-
-            return Math.Max(0, 20 + games[player.Number].Score * player.Age * multiplier);
+            var score = Math.Max(0, games[player.Number].Score);
+            return (float)score * score / player.Age;
         }
 
         private int ProcessOutput(Player player, double[] output)
@@ -98,20 +89,14 @@ namespace Neat
             if (maxIndex == 0)
             {
                 game.MoveLeft();
-                if (!playersThatMovedLeft.Contains(playerNumber))
-                    playersThatMovedLeft.Add(playerNumber);
             }
             else if (maxIndex == 1)
             {
                 game.MoveRight();
-                if (!playersThatMovedRight.Contains(playerNumber))
-                    playersThatMovedRight.Add(playerNumber);
             }
             else if (maxIndex == 2)
             {
                 game.MoveForward();
-                if (!playersThatMovedForward.Contains(playerNumber))
-                    playersThatMovedForward.Add(playerNumber);
             }
 
             if (game.GameOver)
@@ -145,9 +130,6 @@ namespace Neat
                 backGroundWorker.ReportProgress(i * 100 / numberOfGenerationsToTrain);
 
                 games = new Dictionary<int, Game>();
-                playersThatMovedLeft = new List<int>();
-                playersThatMovedRight = new List<int>();
-                playersThatMovedForward = new List<int>();
 
                 while (population.IsAlive)
                 {
@@ -179,20 +161,20 @@ namespace Neat
                 switch (e.Key)
                 {
                     case Key.Left:
-                        game.MoveLeft();
+                        manualGame.MoveLeft();
                         break;
                     case Key.Right:
-                        game.MoveRight();
+                        manualGame.MoveRight();
                         break;
                     case Key.Up:
-                        game.MoveForward();
+                        manualGame.MoveForward();
                         break;
                     case Key.S:
-                        game.Start();
+                        manualGame.Start();
                         break;
                 }
 
-                GameControl0.UpdateGame(game);
+                GameControl0.UpdateGame(manualGame);
             }
             else
             {

@@ -28,14 +28,12 @@
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         
-        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Center">
             <Label FontSize="16">Generation: </Label>
             <Label FontSize="16" x:Name="GenerationValue">0</Label>
             <Label FontSize="16">Number of species:</Label>
             <Label FontSize="16" x:Name="SpeciesValue">0</Label>
         </StackPanel>
-
-        <Label FontSize="16" Grid.Column="5" Grid.Row="0" Name="PressAnyKeyLabel" HorizontalAlignment="Center" VerticalAlignment="Center">Press any key to Process next generation</Label>
         
         <Viewbox Grid.Row="1" Grid.Column="1">
             <local:GameControl x:Name="GameControl0" HorizontalAlignment="Center" VerticalAlignment="Center"  />
